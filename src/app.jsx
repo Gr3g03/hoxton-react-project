@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom"
 import Header from "./pages/Header"
+import NotFound from "./pages/NotFound"
 import Product from "./pages/Product"
 import Products from "./pages/Products"
 import './style.css'
@@ -15,6 +16,8 @@ function App() {
                 <Route index element={<Navigate replace to="/products" />} />
                 <Route path='/products' element={<Products />} />
                 <Route path='/products/:id' element={<Product />} />
+                <Route path="*" element={<NotFound />} />
+
             </Routes>
 
         </div>
@@ -28,7 +31,6 @@ export default App
           <Route path='/categories' element={<Categories />} />
           <Route path='/categories/:id' element={<CategorieProduct />} />
           <Route path='/basket' element={<Basket />} />
-          <Route path="*" element={<NotFound />} /> 
         */}
 
 

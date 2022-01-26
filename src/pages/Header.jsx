@@ -10,7 +10,7 @@ function Header() {
             style={{ "--border-colour": `var(--${randColour()})` }}
         >
             <div className="header__logo" style={{ color: `var(--${randColour()})` }}>
-                Hoxbay
+
             </div>
             <nav className="header__nav">
                 <ul>

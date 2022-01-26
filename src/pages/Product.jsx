@@ -1,30 +1,45 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useStore from "../store";
+import { useParams } from 'react-router-dom'
+
 
 export default function Product() {
-    const products = useStore(store => store.products)
-    const fetchProducts = useStore(store => store.fetchProducts)
+
+
+    const params = useParams()
+
+    const [product, setProduct] = useState([])
 
 
     useEffect(() => {
-        fetchProducts()
+        fetch(`http://localhost:3001/products/${params.id}`)
+            .then(resp => resp.json())
+            .then(productFromServer => setProduct(productFromServer))
     }, [])
 
     return (
         <main>
             <section className="product-detail main-wrapper">
                 <img
-                    src={fetchProducts.image}
-                    alt={fetchProducts.title}
+                    // @ts-ignore
+                    src={product.image}
+                    // @ts-ignore
+                    alt={product.title}
                 />
                 <div className="product-detail__side"  >
                     <h3></h3>
-                    <h2>{products.title}</h2>
+                    <h2>{product.
+                        // @ts-ignore
+                        title}</h2>
                     <p>
-                        {products.description}
+                        {product.
+                            // @ts-ignore
+                            description}
                     </p>
-                    <p>${products.price}</p>
+                    <p>${product.
+                        // @ts-ignore
+                        price}</p>
                     <Link to={"/"}>
                         <button onClick={() => {
                         }}>Add to basket</button></Link>
