@@ -1,15 +1,15 @@
 import { Navigate, Route, Routes } from "react-router-dom"
+import Header from "./pages/Header"
 import Product from "./pages/Product"
 import Products from "./pages/Products"
 import './style.css'
 
 function App() {
 
-
     return (
         <div className="App">
 
-            {/* <Header /> */}
+            <Header />
 
             <Routes>
                 <Route index element={<Navigate replace to="/products" />} />
@@ -33,6 +33,36 @@ export default App
 
 
 
+
+        // handleProductUpVote = (productId) => {
+        //     const nextProducts = this.state.products.map((product) => {
+        //       if (product.id === productId) {
+        //         return Object.assign({}, product, {
+        //           votes: product.votes + 1,
+        //         });
+        //       } else {
+        //         return product;
+        //       }
+        //     });
+        //     this.setState({
+        //       products: nextProducts,
+        //     });
+        //   }
+
+
+        // const productComponents = products.map((product) => (
+        //     <Product
+        //       key={'product-' + product.id}
+        //       id={product.id}
+        //       title={product.title}
+        //       description={product.description}
+        //       url={product.url}
+        //       votes={product.votes}
+        //       submitterAvatarUrl={product.submitterAvatarUrl}
+        //       productImageUrl={product.productImageUrl}
+        //       onVote={this.handleProductUpVote}
+        //     />
+        //   ));
 
 // class ProductList extends React.Component {
 //     render() {
