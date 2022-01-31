@@ -26,7 +26,7 @@ function App() {
 
 export default App
 
-{/*
+{/*.
     
           <Route path='/categories' element={<Categories />} />
           <Route path='/categories/:id' element={<CategorieProduct />} />
