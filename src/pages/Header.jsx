@@ -18,7 +18,7 @@ function Header(setModal) {
                         <Link to={'/products'} >Home</Link>
                     </li>
                     <li onClick={() => setModal('new-user')}>
-                        <Link to={'/login'} > Login </Link>
+                        <Link to={'/LoginModal'} > Login </Link>
                     </li>
                     {/* <li>
                         <Link to={'/Basket'} > Basket </Link>

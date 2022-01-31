@@ -6,6 +6,7 @@ import create from 'zustand'
 const useStore = create((set, get) => ({
     products: [],
     singleProduct: [],
+    count: 0,
 
 
 
@@ -15,7 +16,13 @@ const useStore = create((set, get) => ({
             .then(products => set({ products: products }))
     },
 
+
+    increase: () => set(state => ({ bears: state.bears + 1 })),
+    decrease: () => set(state => ({ bears: state.bears - 1 }))
+
 }))
+
+
 
 //  const [products, setProduct] = useState([])
 

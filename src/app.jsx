@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Navigate, Route, Routes } from "react-router-dom"
 import Header from "./pages/Header"
-import LoginModal from "./pages/LoginModal"
+// import LoginModal from "./pages/LoginModal"
 import NotFound from "./pages/NotFound"
 import Product from "./pages/Product"
 import Products from "./pages/Products"
@@ -13,19 +13,42 @@ function App() {
     return (
         <div className="App">
 
-            <Header setModal={setModal} />
+            <Header />
 
             <Routes>
                 <Route index element={<Navigate replace to="/products" />} />
                 <Route path='/products' element={<Products />} />
                 <Route path='/products/:id' element={<Product />} />
                 <Route path='/modal' element={<Product />} />
-                {/* <Route path='/login' element={<LoginModal
-                    modal={modal}
-                    setModal={setModal} />} /> */}
                 <Route path="*" element={<NotFound />} />
             </Routes>
 
+
+
+            {modal === 'new-user' ? (
+                <div className="modal-wrapper" onClick={() => setModal("")}>
+                    <div className="modal" onClick={(e) => e.stopPropagation()}>
+                        <button onClick={() => setModal("")} className="close-modal">
+                            X
+                        </button>
+                        <form className="new-user" onSubmit={(e) => {
+                            e.preventDefault()
+                            // @ts-ignore
+                            addANewUser(e.target.firstName.value, e.target.lastName.value, e.target.phoneNumber.value)
+                            // @ts-ignore
+                            e.target.reset()
+                        }}>
+                            <label htmlFor="firstName">First name</label>
+                            <input name="firstName" id="firstName" type="text" />
+                            <label htmlFor="lastName">Last name</label>
+                            <input name="lastName" id="lastName" type="text" />
+                            <label htmlFor="phoneNumber">Phone Number</label>
+                            <input name="phoneNumber" id="phoneNumber" type="text" />
+                            <button type="submit">CREATE USER</button>
+                        </form>
+                    </div>
+                </div>
+            ) : null}
 
 
 

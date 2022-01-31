@@ -1,11 +1,16 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useStore from "../store";
 
 export default function Products() {
     const products = useStore(store => store.products)
     const fetchProducts = useStore(store => store.fetchProducts)
+    // const [count, setCount] = useState(0)
+    const downvote = useStore(store => store.votes)
+    const upvote = useStore(store => store.count)
 
+    // const up = () => setCount(count => count + 1)
+    // const down = () => setCount(count => count - 1)
 
     useEffect(() => {
         fetchProducts()
@@ -25,16 +30,16 @@ export default function Products() {
                                     </div>
 
                                     <div className='header'>
-                                        <a>
-                                            <i className='fa fa-2x fa-caret-up' />
-                                        </a>
+
+                                        <button onClick={product.votes + 1}>+</button>
                                         {product.votes}
+                                        {/* <button onClick={product.votes - 1}>-</button> */}
                                     </div>
 
                                     <div className='description'>
-                                        <a href={product.url}>
-                                            {product.title}
-                                        </a>
+
+                                        {product.title}
+
                                         <p className="product-description">
                                             {product.description}
                                         </p>
