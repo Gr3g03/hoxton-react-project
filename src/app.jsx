@@ -1,24 +1,34 @@
+import { useState } from "react"
 import { Navigate, Route, Routes } from "react-router-dom"
 import Header from "./pages/Header"
+import LoginModal from "./pages/LoginModal"
 import NotFound from "./pages/NotFound"
 import Product from "./pages/Product"
 import Products from "./pages/Products"
 import './style.css'
 
 function App() {
+    const [modal, setModal] = useState('')
 
     return (
         <div className="App">
 
-            <Header />
+            <Header setModal={setModal} />
 
             <Routes>
                 <Route index element={<Navigate replace to="/products" />} />
                 <Route path='/products' element={<Products />} />
                 <Route path='/products/:id' element={<Product />} />
+                <Route path='/modal' element={<Product />} />
+                {/* <Route path='/login' element={<LoginModal
+                    modal={modal}
+                    setModal={setModal} />} /> */}
                 <Route path="*" element={<NotFound />} />
-
             </Routes>
+
+
+
+
 
         </div>
     )

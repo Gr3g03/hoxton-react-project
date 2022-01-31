@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const randColour = () =>
     ["green", "red", "blue", "yellow"][Math.floor(Math.random() * 4)];
 
-function Header() {
+function Header(setModal) {
     return (
         <header
             className="header"
@@ -17,13 +17,13 @@ function Header() {
                     <li>
                         <Link to={'/products'} >Home</Link>
                     </li>
-                    {/* <li>
-                        <Link to={'/product'} > Product </Link>
+                    <li onClick={() => setModal('new-user')}>
+                        <Link to={'/login'} > Login </Link>
                     </li>
-                    <li>
+                    {/* <li>
                         <Link to={'/Basket'} > Basket </Link>
 
-                    </li> */}
+                    </li>  */}
                 </ul>
             </nav>
         </header>
