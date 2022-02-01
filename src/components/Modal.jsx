@@ -13,7 +13,7 @@
 //         return (
 //             <div className='modal-wrapper'>
 //                 <div className='modal'>
-//                     <button className='close-modal' onClick={() => setModal('log-in')}>
+//                     <button className='close-modal' onClick={() => setModal('login')}>
 //                         X
 //                     </button>
 //                     <h1>Start chat</h1>

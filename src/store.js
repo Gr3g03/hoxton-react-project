@@ -17,8 +17,8 @@ const useStore = create((set, get) => ({
     },
 
 
-    increase: () => set(state => ({ bears: state.bears + 1 })),
-    decrease: () => set(state => ({ bears: state.bears - 1 }))
+    increase: () => set(state => ({ count: state.count + 1 })),
+    decrease: () => set(state => ({ count: state.count - 1 }))
 
 }))
 

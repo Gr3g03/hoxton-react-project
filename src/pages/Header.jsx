@@ -1,15 +1,9 @@
 import { Link } from "react-router-dom";
 
-const randColour = () =>
-    ["green", "red", "blue", "yellow"][Math.floor(Math.random() * 4)];
-
-function Header(setModal) {
+function Header({ setModal }) {
     return (
-        <header
-            className="header"
-            style={{ "--border-colour": `var(--${randColour()})` }}
-        >
-            <div className="header__logo" style={{ color: `var(--${randColour()})` }}>
+        <header className="header">
+            <div className="header__logo" >
 
             </div>
             <nav className="header__nav">
@@ -18,12 +12,11 @@ function Header(setModal) {
                         <Link to={'/products'} >Home</Link>
                     </li>
                     <li onClick={() => setModal('new-user')}>
-                        <Link to={'/LoginModal'} > Login </Link>
+                        Sign Up
                     </li>
-                    {/* <li>
-                        <Link to={'/Basket'} > Basket </Link>
-
-                    </li>  */}
+                    <li onClick={() => setModal('login')}>
+                        Login
+                    </li>
                 </ul>
             </nav>
         </header>

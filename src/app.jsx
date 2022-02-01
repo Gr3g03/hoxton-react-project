@@ -1,7 +1,6 @@
 import { useState } from "react"
 import { Navigate, Route, Routes } from "react-router-dom"
 import Header from "./pages/Header"
-// import LoginModal from "./pages/LoginModal"
 import NotFound from "./pages/NotFound"
 import Product from "./pages/Product"
 import Products from "./pages/Products"
@@ -9,11 +8,139 @@ import './style.css'
 
 function App() {
     const [modal, setModal] = useState('')
+    const [users, setUsers] = useState([])
+    const [logedin, setLogedin] = useState(null)
+
+
+    if (modal === 'new-user') {
+        return (
+            <div className='modal-wrapper'>
+                <div className='modal'>
+
+                    {modal === 'new-user' ? (
+                        <div className="modal-wrapper" onClick={() => setModal("")}>
+                            <div className="modal" onClick={(e) => e.stopPropagation()}>
+                                <button onClick={() => setModal("")} className="close-modal">
+                                    X
+                                </button>
+                                <form className="new-user" onSubmit={(e) => {
+                                    e.preventDefault()
+                                    // @ts-ignore
+                                    addANewUser(e.target.firstName.value, e.target.lastName.value)
+                                    // @ts-ignore
+                                    e.target.reset()
+                                }}>
+                                    <label htmlFor="firstName">First name</label>
+                                    <input name="firstName" id="firstName" type="text" />
+
+                                    <label htmlFor="lastName">Last name</label>
+                                    <input name="lastName" id="lastName" type="text" />
+
+                                    <label htmlFor="email">E-mail</label>
+                                    <input name="email" id="email" type="email" />
+
+                                    <label htmlFor="birthday">birthday</label>
+                                    <input name="birthday" id="birthday" type="number" />
+                                    <ul>
+                                        <p>Gender</p>
+                                        <li>
+                                            <input id="gender" type="radio" name="gender" value="male" />
+                                            <label htmlFor="consistency1" >
+                                                Male
+                                            </label>
+                                        </li>
+
+                                        <li>
+                                            <input id="gender" type="radio" name="gender" value="female" />
+                                            <label htmlFor="consistency2">
+                                                Female
+                                            </label>
+                                        </li>
+                                    </ul>
+
+
+                                    <label htmlFor="password">password</label>
+                                    <input name="password" id="password" type="password" />
+
+                                    <button type="submit">CREATE USER</button>
+                                </form>
+                            </div>
+                        </div>
+                    ) : null}
+                </div>
+            </div>
+        )
+    }
+
+    if (modal === 'login') {
+        return (
+            <div className='modal-wrapper'>
+                <div className='modal'>
+                    <button className='close-modal' onClick={() => setModal('login')}>
+                        X
+                    </button>
+                    {modal === 'login' ? (
+                        <div className="modal-wrapper" onClick={() => setModal("")}>
+                            <div className="modal" onClick={(e) => e.stopPropagation()}>
+                                <button onClick={() => setModal("")} className="close-modal">
+                                    X
+                                </button>
+                                <form className="login" onSubmit={(e) => {
+                                    e.preventDefault()
+                                    // @ts-ignore
+                                    // @ts-ignore
+                                    e.target.reset()
+                                }}>
+
+                                    <label htmlFor="email">E-mail</label>
+                                    <input name="email" id="email" type="email" />
+
+                                    <label htmlFor="password">password</label>
+                                    <input name="password" id="password" type="password" />
+
+                                    <button type="submit">Login</button>
+                                </form>
+                            </div>
+                        </div>
+                    ) : null}
+                </div>
+            </div>
+        )
+    }
+
+    function addANewUser(firstName, lastName, birthday, gender, id, password) {
+        return fetch("http://localhost:3001/users", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                firstName: firstName,
+                lastName: lastName,
+                birthday: birthday,
+                gender: gender,
+                id: id,
+                password: password
+            })
+        }).then(resp => resp.json)
+            .then((newUser) => {
+                const updatedUser = JSON.parse(JSON.stringify(users))
+                updatedUser.push({
+                    firstName: firstName,
+                    lastName: lastName,
+                    birthday: birthday,
+                    gender: gender,
+                    id: id,
+                    password: password
+                })
+                setUsers(updatedUser)
+            })
+    }
 
     return (
         <div className="App">
 
-            <Header />
+            <Header setModal={setModal} />
 
             <Routes>
                 <Route index element={<Navigate replace to="/products" />} />
@@ -25,30 +152,7 @@ function App() {
 
 
 
-            {modal === 'new-user' ? (
-                <div className="modal-wrapper" onClick={() => setModal("")}>
-                    <div className="modal" onClick={(e) => e.stopPropagation()}>
-                        <button onClick={() => setModal("")} className="close-modal">
-                            X
-                        </button>
-                        <form className="new-user" onSubmit={(e) => {
-                            e.preventDefault()
-                            // @ts-ignore
-                            addANewUser(e.target.firstName.value, e.target.lastName.value, e.target.phoneNumber.value)
-                            // @ts-ignore
-                            e.target.reset()
-                        }}>
-                            <label htmlFor="firstName">First name</label>
-                            <input name="firstName" id="firstName" type="text" />
-                            <label htmlFor="lastName">Last name</label>
-                            <input name="lastName" id="lastName" type="text" />
-                            <label htmlFor="phoneNumber">Phone Number</label>
-                            <input name="phoneNumber" id="phoneNumber" type="text" />
-                            <button type="submit">CREATE USER</button>
-                        </form>
-                    </div>
-                </div>
-            ) : null}
+
 
 
 
@@ -58,14 +162,6 @@ function App() {
 }
 
 export default App
-
-{/*.
-    
-          <Route path='/categories' element={<Categories />} />
-          <Route path='/categories/:id' element={<CategorieProduct />} />
-          <Route path='/basket' element={<Basket />} />
-        */}
-
 
 
 
@@ -85,88 +181,4 @@ export default App
         //   }
 
 
-        // const productComponents = products.map((product) => (
-        //     <Product
-        //       key={'product-' + product.id}
-        //       id={product.id}
-        //       title={product.title}
-        //       description={product.description}
-        //       url={product.url}
-        //       votes={product.votes}
-        //       submitterAvatarUrl={product.submitterAvatarUrl}
-        //       productImageUrl={product.productImageUrl}
-        //       onVote={this.handleProductUpVote}
-        //     />
-        //   ));
 
-// class ProductList extends React.Component {
-//     render() {
-
-//         const products = products.map((product) => (
-//             <Product
-//                 id={product.id}
-//                 title={product.title}
-//                 description={product.description}
-//                 url={product.url}
-//                 votes={product.votes}
-//                 submitterAvatarUrl={product.submitterAvatarUrl}
-//                 productImageUrl={product.productImageUrl}
-//             />
-//         ));
-
-//         return (
-//             <div className="container">
-//                 <h1>Popular products</h1>
-//                 <hr />
-//                 {products}
-//             </div>
-//         );
-//     }
-// }
-
-// class Product extends React.Component {
-//     render() {
-//         return (
-//             <div className='container'>
-//                 <div className="row">
-//                     <div className='col-md-12'>
-
-
-//                         <div className="main">
-//                             <div className="image">
-//                                 <img src={this.props.productImageUrl} />
-//                             </div>
-
-//                             <div className='header'>
-//                                 <a>
-//                                     <i className='fa fa-2x fa-caret-up' />
-//                                 </a>
-//                                 {this.props.votes}
-//                             </div>
-//                             <div className='description'>
-//                                 <a href={this.props.url}>
-//                                     {this.props.title}
-//                                 </a>
-//                                 <p>
-//                                     {this.props.description}
-//                                 </p>
-//                             </div>
-//                             <div className='extra'>
-//                                 <span>Submitted by:</span>
-//                                 <img
-//                                     className='avatar'
-//                                     src={this.props.submitterAvatarUrl}
-//                                 />
-//                             </div>
-//                         </div>
-
-
-//                     </div>
-//                 </div>
-//             </div>
-//         );
-//     }
-// }
-
-
-// ReactDOM.render(<ProductList />, document.getElementById('content'));

@@ -21,7 +21,7 @@
   /* header */
   .header {
     position: relative;
-    display: grid;
+    /* display: grid; */
     grid-template-columns: auto 1fr;
     align-items: center;
     /* height: 100px; */

@@ -3,14 +3,17 @@ import { Link } from "react-router-dom";
 import useStore from "../store";
 
 export default function Products() {
-    const products = useStore(store => store.products)
-    const fetchProducts = useStore(store => store.fetchProducts)
-    // const [count, setCount] = useState(0)
-    const downvote = useStore(store => store.votes)
-    const upvote = useStore(store => store.count)
 
-    // const up = () => setCount(count => count + 1)
-    // const down = () => setCount(count => count - 1)
+    const products = useStore(store => store.products)
+    const vote = useStore(store => store.products)
+    const fetchProducts = useStore(store => store.fetchProducts)
+
+    // const decrease = useStore(store => store.count)
+    // const increase = useStore(store => store.count)
+
+    const [count, setCount] = useState(0)
+    const up = () => setCount(count => count + 1)
+    const down = () => setCount(count => count - 1)
 
     useEffect(() => {
         fetchProducts()
@@ -21,21 +24,22 @@ export default function Products() {
         <div className='container'>
             <div className="row">
                 <div className='col-md-12'>
+
                     {
                         products.map((product, index) =>
                             <div className="main" key={index}>
                                 <Link to={`/products/${product.id}`}>
                                     <div className="image">
                                         <img src={product.image} />
-                                    </div>
+                                    </div> </Link>
 
-                                    <div className='header'>
+                                <div className='header'>
+                                    <button onClick={up}>+</button>
+                                    {count}
+                                    <button onClick={down}>-</button>
+                                </div>
 
-                                        <button onClick={product.votes + 1}>+</button>
-                                        {product.votes}
-                                        {/* <button onClick={product.votes - 1}>-</button> */}
-                                    </div>
-
+                                <Link to={`/products/${product.id}`}>
                                     <div className='description'>
 
                                         {product.title}
