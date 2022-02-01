@@ -9,7 +9,6 @@
 
   .body{
     display: grid;
-    justify-items: center;
     gap: 2rem;
   }
 
@@ -40,7 +39,6 @@
     width: 80%;
     justify-self: center;
     content: "";
-    border-bottom: 2px solid var(--border-colour);
   }
   
   .header__nav {
@@ -72,10 +70,32 @@ a:visited {
 
 div.container {
   display: grid;
+  justify-items: center;
+  width: 80%;
+}
+
+.searchbar{
+  width: 20rem;
+  margin-left: 25rem;
+  border-radius: 5rem;
+  border: 0.1px solid black;
+  height: 1.5rem;
+  padding: 0.5rem;
+}
+
+.header button{
+  border: none;
+  background: repeat none;
+}
+
+.buttonImg{
+  width: 1rem;
 }
 
 div.container h1 {
     text-align: center;
+ 
+
 }
 
 div.main {
@@ -83,6 +103,7 @@ div.main {
     /* width: 100%; */
     margin-bottom: 3rem;
     font-size: 16px;
+    margin-left: 3rem;
 }
 
 div.image {

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Search from "../components/Search";
 import useStore from "../store";
 
 export default function Products() {
@@ -7,9 +8,12 @@ export default function Products() {
     const products = useStore(store => store.products)
     const vote = useStore(store => store.products)
     const fetchProducts = useStore(store => store.fetchProducts)
+    const [search, setSearch] = useState('')
 
-    // const decrease = useStore(store => store.count)
-    // const increase = useStore(store => store.count)
+
+    const searchedProducts = products.filter(product =>
+        product.title.toUpperCase().includes(search.toUpperCase())
+    )
 
     const [count, setCount] = useState(0)
     const up = () => setCount(count => count + 1)
@@ -19,14 +23,17 @@ export default function Products() {
         fetchProducts()
     }, [])
 
-    return (
 
+
+    return (
         <div className='container'>
+            <Search setSearch={setSearch} />
+
             <div className="row">
                 <div className='col-md-12'>
 
                     {
-                        products.map((product, index) =>
+                        searchedProducts.map((product, index) =>
                             <div className="main" key={index}>
                                 <Link to={`/products/${product.id}`}>
                                     <div className="image">
@@ -34,9 +41,14 @@ export default function Products() {
                                     </div> </Link>
 
                                 <div className='header'>
-                                    <button onClick={up}>+</button>
+                                    <button onClick={up}>
+                                        <img className="buttonImg" src={'src/images/up.svg'} alt="down Arrow" />
+                                    </button>
                                     {count}
-                                    <button onClick={down}>-</button>
+                                    <button onClick={down}>
+                                        <img className="buttonImg" src={'src/images/down arrow.svg'} alt="up Arrow" />
+
+                                    </button>
                                 </div>
 
                                 <Link to={`/products/${product.id}`}>
@@ -64,24 +76,5 @@ export default function Products() {
                 </div>
             </div>
         </div>
-
-        // <main>
-        //     <section className="products-container main-wrapper">
-        //         <ul className="products-container__list">
-        //             {products.map(product =>
-        //                 <li key={product.id}>
-        //                     <Link to={`/products/${product.id}`}>
-        //                         <article className="product-item">
-        //                             <img src={product.image}
-        //                                 alt={product.title} />
-        //                             <h3>{product.title}</h3>
-        //                         </article>
-        //                     </Link>
-        //                 </li>
-        //             )}
-
-        //         </ul>
-        //     </section>
-        // </main>
     )
 }

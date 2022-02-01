@@ -40,9 +40,23 @@ export default function Product() {
                     <p>${product.
                         // @ts-ignore
                         price}</p>
-                    <Link to={"/"}>
-                        <button onClick={() => {
-                        }}>Add to basket</button></Link>
+                    <h2>reviews</h2>
+                    <div className="reviews-wrapper">
+
+                        <ul className="comments">
+
+                            {/* <li >
+                                <button className="delete-button">X</button>
+                            </li> */}
+                            <form className="comment-form" >
+                                <input type="text"
+                                    name="comment"
+                                    className="comment-input"
+                                    placeholder="Add a comment" />
+                                <button className="comment-button" type="submit">ADD</button>
+                            </form>
+                        </ul>
+                    </div>
                 </div>
 
             </section>

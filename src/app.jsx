@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Navigate, Route, Routes } from "react-router-dom"
 import Header from "./pages/Header"
+// import LoginModal from "./pages/LoginModal"
 import NotFound from "./pages/NotFound"
 import Product from "./pages/Product"
 import Products from "./pages/Products"
@@ -26,7 +27,7 @@ function App() {
                                 <form className="new-user" onSubmit={(e) => {
                                     e.preventDefault()
                                     // @ts-ignore
-                                    addANewUser(e.target.firstName.value, e.target.lastName.value)
+                                    addANewUser(e.target.firstName.value, e.target.lastName.value, e.target.email.value, e.target.gender.value, e.target.password.value)
                                     // @ts-ignore
                                     e.target.reset()
                                 }}>
@@ -39,19 +40,17 @@ function App() {
                                     <label htmlFor="email">E-mail</label>
                                     <input name="email" id="email" type="email" />
 
-                                    <label htmlFor="birthday">birthday</label>
-                                    <input name="birthday" id="birthday" type="number" />
                                     <ul>
                                         <p>Gender</p>
                                         <li>
-                                            <input id="gender" type="radio" name="gender" value="male" />
+                                            <input type="radio" name="gender" value="male" />
                                             <label htmlFor="consistency1" >
                                                 Male
                                             </label>
                                         </li>
 
                                         <li>
-                                            <input id="gender" type="radio" name="gender" value="female" />
+                                            <input type="radio" name="gender" value="female" />
                                             <label htmlFor="consistency2">
                                                 Female
                                             </label>
@@ -108,7 +107,7 @@ function App() {
         )
     }
 
-    function addANewUser(firstName, lastName, birthday, gender, id, password) {
+    function addANewUser(firstName, lastName, gender, password) {
         return fetch("http://localhost:3001/users", {
             method: "POST",
             headers: {
@@ -117,20 +116,16 @@ function App() {
             body: JSON.stringify({
                 firstName: firstName,
                 lastName: lastName,
-                birthday: birthday,
                 gender: gender,
-                id: id,
                 password: password
             })
         }).then(resp => resp.json)
-            .then((newUser) => {
+            .then(() => {
                 const updatedUser = JSON.parse(JSON.stringify(users))
                 updatedUser.push({
                     firstName: firstName,
                     lastName: lastName,
-                    birthday: birthday,
                     gender: gender,
-                    id: id,
                     password: password
                 })
                 setUsers(updatedUser)
@@ -149,13 +144,6 @@ function App() {
                 <Route path='/modal' element={<Product />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
-
-
-
-
-
-
-
 
         </div>
     )
