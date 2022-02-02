@@ -5,23 +5,35 @@ import useStore from "../store";
 
 export default function Products() {
 
+    const [product, setProduct] = useState({})
+
+
+    useEffect(() => {
+        fetch(`http://localhost:3001/products`)
+            .then(resp => resp.json())
+            .then(productFromServer => setProduct(productFromServer))
+    }, [])
+
     const products = useStore(store => store.products)
     const vote = useStore(store => store.products)
     const fetchProducts = useStore(store => store.fetchProducts)
-    const [search, setSearch] = useState('')
 
+    const [search, setSearch] = useState('')
 
     const searchedProducts = products.filter(product =>
         product.title.toUpperCase().includes(search.toUpperCase())
     )
 
     const [count, setCount] = useState(0)
+
+    // const count = product.votes
     const up = () => setCount(count => count + 1)
     const down = () => setCount(count => count - 1)
 
     useEffect(() => {
         fetchProducts()
     }, [])
+
 
 
 
@@ -41,11 +53,11 @@ export default function Products() {
                                     </div> </Link>
 
                                 <div className='header'>
-                                    <button onClick={up}>
+                                    <button onClick={down}>
                                         <img className="buttonImg" src={'src/images/up.svg'} alt="down Arrow" />
                                     </button>
                                     {count}
-                                    <button onClick={down}>
+                                    <button onClick={up}>
                                         <img className="buttonImg" src={'src/images/down arrow.svg'} alt="up Arrow" />
 
                                     </button>

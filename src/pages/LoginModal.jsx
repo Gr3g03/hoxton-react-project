@@ -1,28 +1,35 @@
 export default function LoginModal(modal, setModal) {
-    {
-        modal === 'login' ? (
-            <div className="modal-wrapper" onClick={() => setModal("")}>
-                <div className="modal" onClick={(e) => e.stopPropagation()}>
-                    <button onClick={() => setModal("")} className="close-modal">
-                        X
-                    </button>
-                    <form className="login" onSubmit={(e) => {
-                        e.preventDefault()
-                        // @ts-ignore
-                        // @ts-ignore
-                        e.target.reset()
-                    }}>
+    return (
+        <>
 
-                        <label htmlFor="email">E-mail</label>
-                        <input name="email" id="email" type="email" />
+            {
+                modal === 'login' ? (
+                    <div className="modal-wrapper" onClick={() => setModal("")}>
+                        <div className="modal" onClick={(e) => e.stopPropagation()}>
+                            <button onClick={() => setModal("")} className="close-modal">
+                                X
+                            </button>
+                            <form className="new-user" onSubmit={(e) => {
+                                e.preventDefault()
+                                // @ts-ignore
+                                addANewUser(e.target.firstName.value, e.target.lastName.value, e.target.email.value, e.target.gender.value, e.target.password.value)
+                                // @ts-ignore
+                                e.target.reset()
+                            }}>
 
-                        <label htmlFor="password">password</label>
-                        <input name="password" id="password" type="password" />
+                                <label htmlFor="email">E-mail</label>
+                                <input name="email" id="email" type="email" />
 
-                        <button type="submit">Login</button>
-                    </form>
-                </div>
-            </div>
-        ) : null
-    }
+
+                                <label htmlFor="password">password</label>
+                                <input name="password" id="password" type="password" />
+
+                                <button type="submit">Log in</button>
+                            </form>
+                        </div>
+                    </div>
+                ) : null
+            }
+        </>
+    )
 }

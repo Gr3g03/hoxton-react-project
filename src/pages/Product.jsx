@@ -10,6 +10,15 @@ export default function Product() {
     const params = useParams()
 
     const [product, setProduct] = useState([])
+    const [comments, setComments] = useState([])
+
+
+
+    useEffect(() => {
+        fetch(`http://localhost:3001/comments`)
+            .then(resp => resp.json())
+            .then(comments => setComments(comments))
+    }, [])
 
 
     useEffect(() => {
@@ -17,6 +26,26 @@ export default function Product() {
             .then(resp => resp.json())
             .then(productFromServer => setProduct(productFromServer))
     }, [])
+
+    function createComents(imageId, content) {
+        fetch('http://localhost:3001/comments', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                imageId: imageId,
+                content: content
+            })
+        }).then(resp => resp.json())
+            .then((newComment) => {
+                const updatedComment = JSON.parse(JSON.stringify(product))
+                const match = updatedComment.find((target) => target.id === imageId)
+                match.comments.push(newComment)
+                setProduct(updatedComment)
+            })
+    }
+
 
     return (
         <main>
@@ -44,17 +73,26 @@ export default function Product() {
                     <div className="reviews-wrapper">
 
                         <ul className="comments">
-
-                            {/* <li >
-                                <button className="delete-button">X</button>
-                            </li> */}
-                            <form className="comment-form" >
+                            {comments.map(coment =>
+                                <li>{coment.content}
+                                    <button className="delete-button"
+                                    >X</button>
+                                </li>
+                            )}
+                            <form className="comment-form" onSubmit={e => {
+                                e.preventDefault()
+                                // @ts-ignore
+                                const content = e.target.comment.value
+                                createComents(product.id, content)
+                                e.reset()
+                            }}>
                                 <input type="text"
                                     name="comment"
                                     className="comment-input"
                                     placeholder="Add a comment" />
                                 <button className="comment-button" type="submit">ADD</button>
                             </form>
+
                         </ul>
                     </div>
                 </div>

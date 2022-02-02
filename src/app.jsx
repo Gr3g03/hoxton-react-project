@@ -5,12 +5,49 @@ import Header from "./pages/Header"
 import NotFound from "./pages/NotFound"
 import Product from "./pages/Product"
 import Products from "./pages/Products"
+import useStore from "./store"
 import './style.css'
 
 function App() {
     const [modal, setModal] = useState('')
-    const [users, setUsers] = useState([])
-    const [logedin, setLogedin] = useState(null)
+    const [newUsers, setNewUsers] = useState([])
+    // const [logedin, setLogedin] = useState(null)
+
+    const { user, users } = useStore()
+
+
+    function addANewUser(firstName, lastName, gender, password) {
+        return fetch("http://localhost:3001/users", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                firstName: firstName,
+                lastName: lastName,
+                gender: gender,
+                password: password
+            })
+        }).then(resp => resp.json)
+            .then(() => {
+                const updatedUser = JSON.parse(JSON.stringify(users))
+                updatedUser.push({
+                    firstName: firstName,
+                    lastName: lastName,
+                    gender: gender,
+                    password: password
+                })
+                setNewUsers(updatedUser)
+            })
+    }
+
+    function signInUser(email, password) {
+        for (const user of users) {
+            if (user.id === email && user.password === password) {
+                user(user)
+            }
+        }
+    }
 
 
     if (modal === 'new-user') {
@@ -75,29 +112,30 @@ function App() {
         return (
             <div className='modal-wrapper'>
                 <div className='modal'>
-                    <button className='close-modal' onClick={() => setModal('login')}>
-                        X
-                    </button>
+
                     {modal === 'login' ? (
                         <div className="modal-wrapper" onClick={() => setModal("")}>
                             <div className="modal" onClick={(e) => e.stopPropagation()}>
                                 <button onClick={() => setModal("")} className="close-modal">
                                     X
                                 </button>
-                                <form className="login" onSubmit={(e) => {
+                                <form className="new-user" onSubmit={(e) => {
                                     e.preventDefault()
                                     // @ts-ignore
+                                    signInUser(e.target.email.value, e.target.password.value)
                                     // @ts-ignore
                                     e.target.reset()
+                                    // (user === null ? e.target.reset())
                                 }}>
 
                                     <label htmlFor="email">E-mail</label>
                                     <input name="email" id="email" type="email" />
 
+
                                     <label htmlFor="password">password</label>
                                     <input name="password" id="password" type="password" />
 
-                                    <button type="submit">Login</button>
+                                    <button type="submit">Log in</button>
                                 </form>
                             </div>
                         </div>
@@ -107,30 +145,8 @@ function App() {
         )
     }
 
-    function addANewUser(firstName, lastName, gender, password) {
-        return fetch("http://localhost:3001/users", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                firstName: firstName,
-                lastName: lastName,
-                gender: gender,
-                password: password
-            })
-        }).then(resp => resp.json)
-            .then(() => {
-                const updatedUser = JSON.parse(JSON.stringify(users))
-                updatedUser.push({
-                    firstName: firstName,
-                    lastName: lastName,
-                    gender: gender,
-                    password: password
-                })
-                setUsers(updatedUser)
-            })
-    }
+
+
 
     return (
         <div className="App">
@@ -147,26 +163,9 @@ function App() {
 
         </div>
     )
+
+
+
 }
 
 export default App
-
-
-
-        // handleProductUpVote = (productId) => {
-        //     const nextProducts = this.state.products.map((product) => {
-        //       if (product.id === productId) {
-        //         return Object.assign({}, product, {
-        //           votes: product.votes + 1,
-        //         });
-        //       } else {
-        //         return product;
-        //       }
-        //     });
-        //     this.setState({
-        //       products: nextProducts,
-        //     });
-        //   }
-
-
-

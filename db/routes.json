@@ -1,0 +1,4 @@
+{
+    "/products": "/products?_embed=comments",
+    "/products/*": "/products/$1?_embed=comments"
+}
