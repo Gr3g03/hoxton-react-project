@@ -72,7 +72,7 @@ export default function Product() {
 
                         <ul className="comments">
                             {comments.map(coment =>
-                                <li>{coment.content}
+                                <li key={coment.id}>{coment.content}
                                     <button className="delete-button"
                                     >X</button>
                                 </li>
@@ -81,9 +81,10 @@ export default function Product() {
                                 e.preventDefault()
                                 // @ts-ignore
                                 const content = e.target.comment.value
+                                // @ts-ignore
                                 createComents(product.id, content)
                                 // @ts-ignore
-                                e.reset()
+                                e.target.reset()
                             }}>
                                 <input type="text"
                                     name="comment"
