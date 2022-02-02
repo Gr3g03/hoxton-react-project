@@ -5,8 +5,15 @@ import useStore from "../store";
 
 export default function Products() {
 
-    const [product, setProduct] = useState({})
+    const [product, setProduct] = useState([])
+    const [search, setSearch] = useState('')
+    const products = useStore(store => store.products)
+    const fetchProducts = useStore(store => store.fetchProducts)
 
+
+    useEffect(() => {
+        fetchProducts()
+    }, [])
 
     useEffect(() => {
         fetch(`http://localhost:3001/products`)
@@ -14,25 +21,46 @@ export default function Products() {
             .then(productFromServer => setProduct(productFromServer))
     }, [])
 
-    const products = useStore(store => store.products)
-    const vote = useStore(store => store.products)
-    const fetchProducts = useStore(store => store.fetchProducts)
-
-    const [search, setSearch] = useState('')
 
     const searchedProducts = products.filter(product =>
         product.title.toUpperCase().includes(search.toUpperCase())
     )
 
-    const [count, setCount] = useState(0)
 
-    // const count = product.votes
-    const up = () => setCount(count => count + 1)
-    const down = () => setCount(count => count - 1)
+    function upvotes(image) {
+        fetch(`http://localhost:3001/products/${image.id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ likes: image.likes++ })
+        })
 
-    useEffect(() => {
-        fetchProducts()
-    }, [])
+        const updatedState = JSON.parse(JSON.stringify(product))
+        const match = updatedState.find(target => target.id === image.id)
+        match.likes + 1
+
+        setProduct(updatedState)
+    }
+
+
+    function downVotes(image) {
+        fetch(`http://localhost:3001/products/${image.id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ likes: image.likes-- })
+        })
+
+        const updatedState = JSON.parse(JSON.stringify(product))
+        const match = updatedState.find(target => target.id === image.id)
+        match.likes - 1
+
+        setProduct(updatedState)
+    }
+
+
 
 
 
@@ -53,11 +81,11 @@ export default function Products() {
                                     </div> </Link>
 
                                 <div className='header'>
-                                    <button onClick={down}>
+                                    <button onClick={() => { upvotes(product) }}>
                                         <img className="buttonImg" src={'src/images/up.svg'} alt="down Arrow" />
                                     </button>
-                                    {count}
-                                    <button onClick={up}>
+                                    {product.likes}
+                                    <button onClick={() => downVotes(product)}>
                                         <img className="buttonImg" src={'src/images/down arrow.svg'} alt="up Arrow" />
 
                                     </button>

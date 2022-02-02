@@ -1,7 +1,6 @@
 import { useState } from "react"
 import { Navigate, Route, Routes } from "react-router-dom"
 import Header from "./pages/Header"
-// import LoginModal from "./pages/LoginModal"
 import NotFound from "./pages/NotFound"
 import Product from "./pages/Product"
 import Products from "./pages/Products"
@@ -48,6 +47,8 @@ function App() {
             }
         }
     }
+
+
 
 
     if (modal === 'new-user') {

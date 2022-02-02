@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import useStore from "../store";
 import { useParams } from 'react-router-dom'
 
 
@@ -84,6 +82,7 @@ export default function Product() {
                                 // @ts-ignore
                                 const content = e.target.comment.value
                                 createComents(product.id, content)
+                                // @ts-ignore
                                 e.reset()
                             }}>
                                 <input type="text"
