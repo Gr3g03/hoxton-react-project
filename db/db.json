@@ -140,29 +140,32 @@
     {
       "firstName": "Grigor",
       "lastName": "Godole",
-      "birthday": "",
-      "gender": "",
-      "role": "",
       "id": "grigor@email.com",
       "password": "abcd"
     },
     {
       "firstName": "Nico",
       "lastName": "Marcora",
-      "birthday": "",
-      "gender": "",
-      "role": "",
       "id": "nico@email.com",
       "password": "abcd"
     },
     {
       "firtName": "Ed",
       "lastName": "Putans",
-      "birthday": "",
-      "gender": "",
-      "role": "",
       "id": "ed@email.com",
       "password": "abcd"
+    },
+    {
+      "firstName": "fasfas",
+      "lastName": "das",
+      "password": "abcd",
+      "id": "ggsa@email.com"
+    },
+    {
+      "firstName": "dsa",
+      "lastName": "dsadsa",
+      "password": "abcd",
+      "id": "dsasaddsa@co.co"
     }
   ],
   "comments": [
@@ -170,21 +173,6 @@
       "id": 1,
       "content": "Noice",
       "imageId": 1
-    },
-    {
-      "id": 2,
-      "content": "test",
-      "imageId": 2
-    },
-    {
-      "imageId": 1,
-      "content": "ads",
-      "id": 3
-    },
-    {
-      "imageId": 1,
-      "content": "fsafsa",
-      "id": 4
     }
   ]
 }

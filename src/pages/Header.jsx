@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Header({ setModal }) {
+
     return (
         <header className="header">
             <div className="header__logo" >
@@ -20,6 +21,6 @@ function Header({ setModal }) {
                 </ul>
             </nav>
         </header>
-    );
+    )
 }
 export default Header;
