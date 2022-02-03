@@ -1,16 +1,12 @@
 * {
   box-sizing: border-box;
-  margin: 1px;
+  margin: 0;
   padding: 0;
 }
   li {
     list-style: none;
   }
 
-  .body{
-    display: grid;
-    gap: 2rem;
-  }
 
   img {
     max-width: 100%;
@@ -20,16 +16,14 @@
   /* header */
   .header {
     position: relative;
-    /* display: grid; */
+    display: grid;
     grid-template-columns: auto 1fr;
     align-items: center;
-    /* height: 100px; */
+    justify-items: center;
+    height: 80px;
   }
   
-  .header__logo {
-    margin: 0 1rem;
-    font-size: 3.5rem;
-  }
+ 
   
   .header::after {
     display: block;
@@ -68,22 +62,42 @@ a:visited {
 
 /* MainSection */
 
-div.container {
+.container {
   display: grid;
-  justify-items: center;
+  /* border:  1px solid black; */
+  justify-content: center;
   width: 80%;
+  gap: 0.5rem;
 }
+
+div.main {
+  /* border:  1px solid black; */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(2px, 0.5fr));
+  align-items: center;
+  justify-items: center;
+  
+
+}
+
+
+.product_wrapper {
+  display: grid;
+  grid-template-rows: 1fr  ;
+  gap: 0.5rem;
+}
+
 
 .searchbar{
   width: 20rem;
-  margin-left: 25rem;
+  margin-left: 26rem;
   border-radius: 5rem;
   border: 0.1px solid black;
-  height: 1.5rem;
+  height: 1.8rem;
   padding: 0.5rem;
 }
 
-.header button{
+.button_wrapper button {
   border: none;
   background: repeat none;
 }
@@ -93,31 +107,19 @@ div.container {
 }
 
 div.container h1 {
-    text-align: center;
- 
-
+  text-align: center;
+  
+  
 }
 
-div.main {
-    height: 10rem;
-    /* width: 100%; */
-    margin-bottom: 3rem;
-    font-size: 16px;
-    margin-left: 3rem;
-}
+
 
 div.image {
     width: 10rem;
-    height: 100%;
-    float: left;
-    margin-right: 2rem;
 }
 
-div.image img {
-    /* height: 100%; */
-}
 
-div.header {
+.button_wrapper {
     font-size: 24px;
 }
 
@@ -126,7 +128,7 @@ i.fa {
 }
 
 img.avatar {
-  display: grid;
+  /* display: grid; */
     width: 20px;
     height: 20px;
     border-radius: 20px;

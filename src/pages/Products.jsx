@@ -69,52 +69,49 @@ export default function Products() {
         <div className='container'>
             <Search setSearch={setSearch} />
 
-            <div className="row">
-                <div className='col-md-12'>
+            {
+                searchedProducts.map((product, index) =>
+                    <div className="main" key={index}>
+                        <Link to={`/products/${product.id}`}>
+                            <div className="image">
+                                <img src={product.image} />
+                            </div> </Link>
 
-                    {
-                        searchedProducts.map((product, index) =>
-                            <div className="main" key={index}>
-                                <Link to={`/products/${product.id}`}>
-                                    <div className="image">
-                                        <img src={product.image} />
-                                    </div> </Link>
+                        <div className="product_wrapper">
+                            <div className='button_wrapper'>
+                                <button onClick={() => { upvotes(product) }}>
+                                    <img className="buttonImg" src={'src/images/up.svg'} alt="down Arrow" />
+                                </button>
+                                {product.likes}
+                                <button onClick={() => downVotes(product)}>
+                                    <img className="buttonImg" src={'src/images/down arrow.svg'} alt="up Arrow" />
 
-                                <div className='header'>
-                                    <button onClick={() => { upvotes(product) }}>
-                                        <img className="buttonImg" src={'src/images/up.svg'} alt="down Arrow" />
-                                    </button>
-                                    {product.likes}
-                                    <button onClick={() => downVotes(product)}>
-                                        <img className="buttonImg" src={'src/images/down arrow.svg'} alt="up Arrow" />
+                                </button>
+                            </div>
 
-                                    </button>
+                            <Link to={`/products/${product.id}`}>
+                                <div className='description'>
+
+                                    {product.title}
+
+                                    <p className="product-description">
+                                        {product.description}
+                                    </p>
                                 </div>
 
-                                <Link to={`/products/${product.id}`}>
-                                    <div className='description'>
+                                <div className='extra'>
+                                    <span>Submitted by:</span>
+                                    <img
+                                        className='avatar'
+                                        src={product.image}
+                                    />
+                                </div>
+                            </Link>
+                        </div>
+                    </div>
+                )
+            }
 
-                                        {product.title}
-
-                                        <p className="product-description">
-                                            {product.description}
-                                        </p>
-                                    </div>
-
-                                    <div className='extra'>
-                                        <span>Submitted by:</span>
-                                        <img
-                                            className='avatar'
-                                            src={product.image}
-                                        />
-                                    </div>
-                                </Link>
-                            </div>
-                        )
-                    }
-
-                </div>
-            </div>
         </div>
     )
 }
