@@ -237,7 +237,7 @@ img.avatar {
 }
 
 .new-user button {
-  background-color: #009688;
+  background-color: #002f96;
   display: grid;
   place-self: center;
   color: white;
@@ -250,7 +250,7 @@ img.avatar {
   position: absolute;
   right: -10px;
   top: -10px;
-  background-color: #007a6f;
+  background-color: #002f96;
   border-radius: 50%;
   color: white;
   width: 35px;
