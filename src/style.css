@@ -76,8 +76,8 @@ div.main {
   grid-template-columns: repeat(auto-fit, minmax(2px, 0.5fr));
   align-items: center;
   justify-items: center;
-  
-
+  width: 80%;
+margin-left: 10rem;
 }
 
 
@@ -87,10 +87,13 @@ div.main {
   gap: 0.5rem;
 }
 
+.main:hover{
+  transform: scale(1.1)
+}
 
 .searchbar{
   width: 20rem;
-  margin-left: 26rem;
+  margin-left: 35rem;
   border-radius: 5rem;
   border: 0.1px solid black;
   height: 1.8rem;
@@ -108,8 +111,6 @@ div.main {
 
 div.container h1 {
   text-align: center;
-  
-  
 }
 
 
@@ -158,7 +159,7 @@ img.avatar {
   display: grid;
   margin: 0 auto;
   column-gap: 2rem;
-  grid-template-columns: 4fr 6fr;
+  grid-template-columns: 3fr 6fr;
   padding: 2rem;
   height: 100%;
 }
@@ -170,7 +171,7 @@ img.avatar {
 .product-detail__side {
   position: relative;
   display: grid;
-  grid-template-rows: 20% auto;
+  /* grid-template-rows: 20% auto; */
   align-content: start;
   padding-left: 1rem;
   border-left: 2px solid;
@@ -197,13 +198,8 @@ img.avatar {
   padding: 1rem;
   border: 2px solid var(--black);
   justify-self: end;
-  margin-top: 5rem;
 }
 
-.product-detail__side button:hover {
-  background-color: var(--blue);
-  color: var(--white);
-}
 
 
 /* Modal */
