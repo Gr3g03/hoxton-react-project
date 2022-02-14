@@ -25,7 +25,7 @@
       "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
       "categoryId": 3,
       "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-      "likes": 13
+      "likes": 15
     },
     {
       "id": 2,
@@ -34,7 +34,7 @@
       "description": "Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.",
       "categoryId": 3,
       "image": "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
-      "likes": 8
+      "likes": 6
     },
     {
       "id": 3,
@@ -115,7 +115,7 @@
       "description": "21. 5 inches Full HD (1920 x 1080) widescreen IPS display And Radeon free Sync technology. ",
       "categoryId": 1,
       "image": "https://fakestoreapi.com/img/81QpkIctqPL._AC_SX679_.jpg",
-      "likes": 5
+      "likes": 7
     },
     {
       "id": 18,
@@ -155,6 +155,11 @@
       "id": 1,
       "content": "Noice",
       "imageId": 1
+    },
+    {
+      "imageId": 1,
+      "content": "dsa",
+      "id": 2
     }
   ]
 }

@@ -16,6 +16,7 @@ export default function LoginModal({ modal, setModal, setLogedin }) {
         alert('welcome')
     }
 
+
     return (
         <div className='modal'>
 

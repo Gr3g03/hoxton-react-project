@@ -12,7 +12,7 @@ export default function SignupModal({ modal, setModal, setNewUsers, newUsers }) 
                 password: password,
                 id: id
             })
-        }).then(resp => resp.json)
+        }).then(resp => resp.json())
             .then(() => {
                 const updatedUser = JSON.parse(JSON.stringify(newUsers))
                 updatedUser.push({
@@ -49,7 +49,6 @@ export default function SignupModal({ modal, setModal, setNewUsers, newUsers }) 
 
                             <label htmlFor="email">E-mail</label>
                             <input name="email" id="email" type="email" />
-
 
 
                             <label htmlFor="password">password</label>
